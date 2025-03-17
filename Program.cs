@@ -12,7 +12,7 @@ using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-DotNetEnv.Env.Load();
+Env.Load();
 
 string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
@@ -22,10 +22,6 @@ builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseNpgsql(connectionString ?? builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddEnvironmentVariables();  // Load environment variables after appsettings.json
 
 
 
@@ -46,11 +42,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = issuer!,
-            ValidAudience = audience!,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!))
+            ValidIssuer = "YourIssuer",  // Define the valid issuer
+            ValidAudience = "YourAudience",  // Define the valid audience
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("moresimplekeyrightherefolkssssssssssssss"))  // Your secret key
+
         };
     });
+
 
 // Add services for controllers and Swagger (for API documentation)
 builder.Services.AddControllers();
