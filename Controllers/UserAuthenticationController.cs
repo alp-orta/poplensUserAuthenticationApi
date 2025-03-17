@@ -31,6 +31,14 @@ namespace poplensUserAuthenticationApi.Controllers {
         }
 
         [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpGet("FetchIdsFromUsername/{username}")]
+        public async Task<IActionResult> FetchIdsFromUsername(string username) {
+            Guard.Against.NullOrEmpty(username, nameof(username));
+            var ids = await _userAuthenticationService.FetchIdsFromUsername(username);
+            return Ok(new { UserId = ids.UserId, ProfileId = ids.ProfileId });
+        }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("ProtectedData")]
         public IActionResult ProtectedData() {
             return Ok(new { Message = "You have access to this protected endpoint." });

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("poplensUserAuthenticationApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c8ac87553f79af87e393f929e3ad37d0d12a0cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8682a927f7305a061cf6ac0b4d8db7328d011964")]
 [assembly: System.Reflection.AssemblyProductAttribute("poplensUserAuthenticationApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("poplensUserAuthenticationApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
