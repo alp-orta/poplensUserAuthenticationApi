@@ -43,5 +43,16 @@ namespace poplensUserAuthenticationApi.Controllers {
         public IActionResult ProtectedData() {
             return Ok(new { Message = "You have access to this protected endpoint." });
         }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpPost("GetUsernamesByIdsAsync")]
+        public async Task<IActionResult> GetUsernamesByIdsAsync([FromBody] List<Guid> userIds) {
+            if (userIds == null || userIds.Count == 0) {
+                return BadRequest("User IDs cannot be null or empty.");
+            }
+
+            var userDictionary = await _userAuthenticationService.GetUsernamesByIdsAsync(userIds);
+            return Ok(userDictionary);
+        }
     }
 }

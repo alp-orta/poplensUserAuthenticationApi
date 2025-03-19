@@ -13,3 +13,15 @@ Thumbs.db
 obj/
 /appsettings.json
 /appsettings.development.json
+# .NET
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs

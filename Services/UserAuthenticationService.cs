@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using poplensUserAuthenticationApi.Contracts;
 using poplensUserAuthenticationApi.Models;
 using poplensUserAuthenticationApi.Models.Dtos;
-using poplensUserProfileApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -105,6 +104,20 @@ namespace poplensUserAuthenticationApi.Services {
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<Dictionary<Guid, string>> GetUsernamesByIdsAsync(List<Guid> userIds) {
+            Guard.Against.Null(userIds, nameof(userIds));
+            var userDictionary = new Dictionary<Guid, string>();
+
+            foreach (var userId in userIds) {
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user != null) {
+                    userDictionary[userId] = user.UserName;
+                }
+            }
+
+            return userDictionary;
         }
     }
 }
