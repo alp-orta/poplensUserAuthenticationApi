@@ -54,5 +54,10 @@ namespace poplensUserAuthenticationApi.Controllers {
             var userDictionary = await _userAuthenticationService.GetUsernamesByIdsAsync(userIds);
             return Ok(userDictionary);
         }
+
+        [HttpGet("health")]
+        public IActionResult Health() {
+            return Ok("Service is healthy");
+        }
     }
 }
