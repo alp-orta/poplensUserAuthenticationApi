@@ -13,7 +13,7 @@ namespace poplensUserAuthenticationApi.Services {
     public class UserAuthenticationService : IUserAuthenticationService {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly string profileApiUrl = $"https://localhost:7056/api/Profile";
+        private readonly string profileApiUrl = $"http://poplensUserProfileApi:8080/api/Profile";
 
         public UserAuthenticationService(UserManager<User> userManager, IConfiguration configuration) {
             _userManager = userManager;
@@ -90,9 +90,9 @@ namespace poplensUserAuthenticationApi.Services {
             };
 
             DotNetEnv.Env.Load();
-            string jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
-            string issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-            string audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+            string jwtKey = "moresimplekeyrightherefolkssssssssssssss";
+            string issuer = "YourIssuer"; //TODO: docker compose environmentından al
+            string audience = "YourAudience";
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

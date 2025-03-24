@@ -19,7 +19,7 @@ string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRI
 // Add services to the container.
 // Configure database context with PostgreSQL
 builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseNpgsql(connectionString ?? builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql("Host=postgresUserAuth;Port=5432;Username=postgre;Password=postgre;Database=UserAuthDb"));
 
 
 
@@ -63,11 +63,8 @@ builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PopLens API v1"));
-}
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PopLens User Authentication API v1"));
 
 app.UseHttpsRedirection();
 
