@@ -55,6 +55,13 @@ namespace poplensUserAuthenticationApi.Controllers {
             return Ok(userDictionary);
         }
 
+        [HttpGet("SearchUserByUsername/{username}")]
+        public async Task<IActionResult> SearchUserByUsername(string username) {
+            Guard.Against.NullOrEmpty(username, nameof(username));
+            var users = await _userAuthenticationService.SearchUserByUsernameAsync(username);
+            return Ok(users);
+        }
+
         [HttpGet("health")]
         public IActionResult Health() {
             return Ok("Service is healthy");

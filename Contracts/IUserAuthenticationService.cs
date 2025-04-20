@@ -6,6 +6,7 @@ namespace poplensUserAuthenticationApi.Contracts {
         Task<string> RegisterAsync(RegisterInfo registerDto);
         Task<string> LoginAsync(LoginInfo loginDto);
         Task<Ids> FetchIdsFromUsername(string username);
-        Task<Dictionary<Guid, string>> GetUsernamesByIdsAsync(List<Guid> userIds);
+        Task<Dictionary<Guid, string>> GetUsernamesByIdsAsync(List<Guid> userIds); 
+        Task<List<User>> SearchUserByUsernameAsync(string username);
     }
 }

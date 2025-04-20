@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using poplensUserAuthenticationApi.Contracts;
@@ -118,6 +119,19 @@ namespace poplensUserAuthenticationApi.Services {
             }
 
             return userDictionary;
+        }
+
+        public async Task<List<User>> SearchUserByUsernameAsync(string username) {
+            Guard.Against.NullOrEmpty(username, nameof(username));
+
+            // Find users whose usernames contain the search term
+            var users = await _userManager.Users
+                .Where(u => u.UserName.Contains(username))
+                .OrderBy(u => u.UserName)
+                .Take(8)
+                .ToListAsync();
+
+            return users;
         }
     }
 }
